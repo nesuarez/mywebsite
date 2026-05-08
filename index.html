@@ -29,7 +29,7 @@
 							<ul>
 								<li><a href="https://www.facebook.com/nesuarezg" class="icon brands fa-facebook-f" rel="noopener noreferrer" target="_blank"><span class="label">Facebook</span></a></li>
 								<li><a href="https://github.com/nesuarez" class="icon brands fa-github" rel="noopener noreferrer" target="_blank"><span class="label">Github</span></a></li>
-								<li><a href="mailto:ed@nesuarez.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+								<li><a id="email-link" href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
 								<li><a href="https://de.linkedin.com/in/nelson-eduardo-suarez-guevara" class="icon brands fa-linkedin" rel="noopener noreferrer" target="_blank"><span class="label">Linkedin</span></a></li>
 							</ul>
 						</nav>
@@ -42,7 +42,11 @@
 			</div>
 		</div>
 		<script>
-			window.onload = function() { document.body.classList.remove('is-preload'); }
+			window.onload = function() {
+				document.body.classList.remove('is-preload');
+				var u = 'ed', d = 'nesuarez.com';
+				document.getElementById('email-link').href = 'mailto:' + u + '@' + d;
+			}
 			window.ontouchmove = function() { return false; }
 			window.onorientationchange = function() { document.body.scrollTop = 0; }
 		</script>
