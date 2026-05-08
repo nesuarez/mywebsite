@@ -31,6 +31,7 @@
 								<li><a href="https://github.com/nesuarez" class="icon brands fa-github" rel="noopener noreferrer" target="_blank"><span class="label">Github</span></a></li>
 								<li><a id="email-link" href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
 								<li><a href="https://de.linkedin.com/in/nelson-eduardo-suarez-guevara" class="icon brands fa-linkedin" rel="noopener noreferrer" target="_blank"><span class="label">Linkedin</span></a></li>
+								<li><a href="https://e2sq.com" class="icon solid fa-robot" rel="noopener noreferrer" target="_blank"><span class="label">e2sq.com</span></a></li>
 							</ul>
 						</nav>
 					</header>
@@ -41,6 +42,34 @@
 
 			</div>
 		</div>
+
+		<!-- Top-right Widget: Clocks + Propeller -->
+		<div id="top-widget" aria-hidden="true">
+			<div id="clocks">
+				<div class="clock-row">
+					<span class="clock-label">UTC</span>
+					<span class="clock-time" id="clock-utc">--:--:--</span>
+				</div>
+				<div class="clock-row">
+					<span class="clock-label" id="clock-cet-label">CEST</span>
+					<span class="clock-time" id="clock-cet">--:--:--</span>
+				</div>
+			</div>
+			<div id="propeller">
+				<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+					<g transform="translate(50,50)" fill="rgba(255,255,255,0.88)">
+						<!-- DC-3 style: wide paddle blades with rounded tips -->
+						<path d="M -3,-4 C -7,-10 -13,-20 -11,-34 C -9,-43 0,-47 6,-42 C 12,-36 10,-22 6,-12 C 4,-7 3,-5 -3,-4 Z"/>
+						<path d="M -3,-4 C -7,-10 -13,-20 -11,-34 C -9,-43 0,-47 6,-42 C 12,-36 10,-22 6,-12 C 4,-7 3,-5 -3,-4 Z" transform="rotate(120)"/>
+						<path d="M -3,-4 C -7,-10 -13,-20 -11,-34 C -9,-43 0,-47 6,-42 C 12,-36 10,-22 6,-12 C 4,-7 3,-5 -3,-4 Z" transform="rotate(240)"/>
+						<!-- Hub -->
+						<circle r="5"/>
+						<circle r="2.5" fill="rgba(0,0,0,0.35)"/>
+					</g>
+				</svg>
+			</div>
+		</div>
+
 		<script>
 			window.onload = function() {
 				document.body.classList.remove('is-preload');
@@ -49,6 +78,25 @@
 			}
 			window.ontouchmove = function() { return false; }
 			window.onorientationchange = function() { document.body.scrollTop = 0; }
+
+			function pad(n) { return String(n).padStart(2, '0'); }
+			function updateClocks() {
+				var now = new Date();
+				document.getElementById('clock-utc').textContent =
+					pad(now.getUTCHours()) + ':' + pad(now.getUTCMinutes()) + ':' + pad(now.getUTCSeconds());
+				var berlinFmt = new Intl.DateTimeFormat('en-GB', {
+					timeZone: 'Europe/Berlin',
+					hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+				});
+				document.getElementById('clock-cet').textContent = berlinFmt.format(now);
+				var berlinHour = parseInt(new Intl.DateTimeFormat('en-US', {
+					timeZone: 'Europe/Berlin', hour: 'numeric', hour12: false
+				}).format(now));
+				var offset = (berlinHour - now.getUTCHours() + 24) % 24;
+				document.getElementById('clock-cet-label').textContent = offset === 2 ? 'CEST' : 'CET';
+			}
+			updateClocks();
+			setInterval(updateClocks, 1000);
 		</script>
 	</body>
 </html>
