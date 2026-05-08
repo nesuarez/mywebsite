@@ -35,7 +35,10 @@
 				<!-- Header -->
 					<header id="header">
 						<h1>Nelson E Suarez G</h1>
-						<p>Electronic engineer &nbsp;&bull;&nbsp; Aviation Expert &nbsp;&bull;&nbsp; IoT</p>
+						<p>
+							<span class="lang-en">Electronic engineer &nbsp;&bull;&nbsp; Aviation Expert &nbsp;&bull;&nbsp; IoT</span>
+							<span class="lang-es">Ingeniero electrónico &nbsp;&bull;&nbsp; Experto en Aviación &nbsp;&bull;&nbsp; IoT</span>
+						</p>
 						<nav>
 							<ul>
 								<li><a href="https://www.facebook.com/nesuarezg" class="icon brands fa-facebook-f" rel="noopener noreferrer" target="_blank"><span class="label">Facebook</span></a></li>
@@ -52,6 +55,14 @@
 					</footer>
 
 			</div>
+		</div>
+
+		<!-- Language Toggle -->
+		<div id="lang-toggle">
+			<button id="lang-btn" onclick="toggleLang()" aria-label="Cambiar idioma / Change language">
+				<span class="lang-en">ES</span>
+				<span class="lang-es">EN</span>
+			</button>
 		</div>
 
 		<!-- Top-right Widget: Clocks + Propeller -->
@@ -89,6 +100,20 @@
 			}
 			window.ontouchmove = function() { return false; }
 			window.onorientationchange = function() { document.body.scrollTop = 0; }
+
+			function toggleLang() {
+				var isEs = document.body.classList.toggle('es');
+				document.title = isEs ? 'Sitio Personal nesuarez' : 'Personal Web Site nesuarez';
+				document.documentElement.lang = isEs ? 'es' : 'en';
+				localStorage.setItem('lang', isEs ? 'es' : 'en');
+			}
+			(function() {
+				if (localStorage.getItem('lang') === 'es') {
+					document.body.classList.add('es');
+					document.title = 'Sitio Personal nesuarez';
+					document.documentElement.lang = 'es';
+				}
+			})();
 
 			function pad(n) { return String(n).padStart(2, '0'); }
 			function updateClocks() {
