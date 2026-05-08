@@ -1146,5 +1146,23 @@ input, select, textarea {
 	}
 
 	@media screen and (max-width: 480px) {
-		#top-widget { display: none; }
+		#top-widget {
+			top: 0.6em;
+			right: 0.6em;
+			gap: 8px;
+		}
+
+		#clocks {
+			gap: 8px;
+		}
+
+		.clock-row {
+			font-size: 0.62em;
+			gap: 3px;
+		}
+
+		#propeller {
+			width: 36px;
+			height: 36px;
+		}
 	}
