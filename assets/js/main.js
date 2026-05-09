@@ -5,15 +5,15 @@
 
 window.onload = function() {
 	document.body.classList.remove('is-preload');
-	
-	// Email obfuscation: Characters stored as ASCII codes
-	// Decodes to: ed@nesuarez.com
+
 	const emailChars = [101, 100, 64, 110, 101, 115, 117, 97, 114, 101, 122, 46, 99, 111, 109];
 	let email = '';
 	for (let i = 0; i < emailChars.length; i++) {
 		email += String.fromCharCode(emailChars[i]);
 	}
 	document.getElementById('email-link').href = 'mailto:' + email;
+
+	document.getElementById('lang-btn').addEventListener('click', toggleLang);
 }
 
 window.onorientationchange = function() {
