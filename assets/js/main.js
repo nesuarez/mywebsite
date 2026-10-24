@@ -24,11 +24,17 @@ function toggleLang() {
 	var isEs = document.body.classList.toggle('es');
 	document.title = isEs ? 'Sitio Personal nesuarez' : 'Personal Web Site nesuarez';
 	document.documentElement.lang = isEs ? 'es' : 'en';
-	localStorage.setItem('lang', isEs ? 'es' : 'en');
+	try { localStorage.setItem('lang', isEs ? 'es' : 'en'); } catch (e) {}
 }
 
 (function() {
-	if (localStorage.getItem('lang') === 'es') {
+	// Saved choice wins; otherwise use Spanish only if the browser language is Spanish
+	var saved = null;
+	try { saved = localStorage.getItem('lang'); } catch (e) {}
+	var browserLang = (navigator.language || '').toLowerCase();
+	var lang = saved || (browserLang.indexOf('es') === 0 ? 'es' : 'en');
+
+	if (lang === 'es') {
 		document.body.classList.add('es');
 		document.title = 'Sitio Personal nesuarez';
 		document.documentElement.lang = 'es';
